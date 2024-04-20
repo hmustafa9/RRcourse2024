@@ -1,26 +1,28 @@
 ---
 title: "Dexter Report"
 author: "Husnain Mustafa"
-date: "20/04/2024"
+date: "04/15/2024"
 format: html
 execute:
   echo: false
+theme: darkly
 ---
 
-# Introduction
+# Introduction:
 *Dexter* is an American television drama that was broadcast on the premium cable channel *Showtime* from October 1, 2006, to September 22, 2013. A total of 96 episodes of Dexter were broadcast over eight seasons.
 
 The series is based on characters created by *Jeff Lindsay* for his "Dexter" series of novels, and follows the life of Dexter Morgan (Michael C. Hall), a Miami Metro Police Department blood pattern analyst with a double life. While investigating murders in the homicide division, Dexter hunts and kills murderers and criminals who have escaped the justice system. Although the first season is based on the events of Darkly Dreaming Dexter, the series' subsequent seasons do not follow the novels in the series. Departing from the narrative of Lindsay's second Dexter novel Dearly Devoted Dexter, the show's writer Daniel Cerone said that the writers "didn't see the opportunity in the second book" to adapt it.
 
-## Poster
+## Poster:
 <img src="https://posterspy.com/wp-content/uploads/2015/05/Export-Dexter-tribute-Digital-Painting-Ladislas1.jpg" alt="Suits Logo" width="800" height="1131">
 
-## Overall Average Viewership
+## Overall Average Viewership:
 Over 8 million weekly viewers across all platforms for the entire series, including "Dexter: New Blood". This makes it the most-watched series in Showtime's history.
 Viewership grew steadily throughout the original series run. Season 1 averaged 0.63 million viewers, while Season 8 averaged 2.36 million viewers. The season 4 finale holds the record for the most-watched original series episode on Showtime at the time, with 2.6 million viewers. 
 Despite being the most-watched series in Showtime history, "Dexter: New Blood" averaged a lower viewership of 0.59 million viewers per episode. However, its finale set a record for Showtime with 3 million viewers across all platforms, including 2 million via streaming and on-demand.
 
 ## Viewership Over Time:
+Beow graph shows average viewers over ach season of the show.
 ```{python}
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -63,16 +65,74 @@ df = pd.DataFrame(data)
 # Convert 'Date' column to datetime
 df['Date'] = pd.to_datetime(df['Date'])
 
+
+
+# Calculate average viewers for each season
+average_viewers = []
+for i in range(0, len(df), 12):
+    season_average = df['US Viewer Millions'].iloc[i:i+12].mean()
+    average_viewers.append(season_average)
+
+season_labels = ['Season 1', 'Season 2', 'Season 3', 'Season 4', 'Season 5', 'Season 6', 'Season 7', 'Season 8']  # Season labels
 # Plot
 plt.figure(figsize=(8, 6))
-colors = ['b', 'g', 'r', 'c', 'm', 'y', 'k']  # List of colors
+plt.plot(range(1, len(average_viewers)+1), average_viewers, marker='o', linestyle='-')
+plt.title('Average Viewers Per Season')
+plt.xlabel('Season')
+plt.ylabel('Average US Viewer Millions')
+plt.xticks(range(1, len(average_viewers)+1), season_labels)  # Set x-ticks as season labels
+plt.grid(True)  # Adding grid for better visualization
+plt.show()
+
+
+```
+
+# Popularity Per Episode:
+This plot shows the  viewership of the show over the years. With each season highlightes and each episode as a distinct point.
+```{python}
+plt.figure(figsize=(8, 6))
+colors = ['b', 'g', 'r', 'c', 'm', 'y', 'k', 'orange']  # List of colors
+season_labels = ['Season 1', 'Season 2', 'Season 3', 'Season 4', 'Season 5', 'Season 6', 'Season 7', 'Season 8']  # Season labels
 for i in range(0, len(df), 12):
-    color_index = i // 8 % len(colors)  # Calculate the color index
-    plt.scatter(df['Date'].iloc[i:i+8], df['US Viewer Millions'].iloc[i:i+8], marker='o', color=colors[color_index])
+    season_index = i // 12
+    color_index = season_index % len(colors)  # Calculate the color index
+    plt.scatter(df['Date'].iloc[i:i+12], df['US Viewer Millions'].iloc[i:i+12], marker='o', color=colors[color_index], label=season_labels[season_index])
 plt.title('Viewer Millions Over Time')
 plt.xlabel('Release Date')
 plt.ylabel('US Viewer Millions')
 plt.grid(True)  # Adding grid for better visualization
+plt.legend()
 plt.show()
+
 ```
+
+```{python}
+# Inline variable calculations
+season1_avg = round(df['US Viewer Millions'].iloc[0:12].mean(),2)
+season4_avg = round(df['US Viewer Millions'].iloc[36:48].mean(),2)
+season8_avg = round(df['US Viewer Millions'].iloc[84:96].mean(),2)
+finale_viewers = round(df['US Viewer Millions'].iloc[-1],2)
+```
+
+# Season Viewership Analysis:
+
+The *Dexter* series has shown a remarkable trend in viewership over its eight-season run. The analysis below utilizes inline variables to summarize key insights from the viewership data.
+
+## Summary of Viewership Trends:
+
+- **Starting Strong:** The series began with a solid viewership, with Season 1 averaging `{python} season1_avg` million viewers.
+- **Peak Popularity:** Dexter reached its peak popularity in Season 4, with an average of `{python} season4_avg` million viewers.
+- **Consistent Growth:** There was a consistent growth in viewership from Season 1 through Season 4.
+- **Sustaining Interest:** While there were fluctuations, the series maintained a strong audience, with Season 8 averaging `{python} season8_avg` million viewers.
+- **Series Finale:** The series finale saw a significant spike in viewership, drawing `{python} finale_viewers` million viewers across all platforms.
+
+## Insights from the Data:
+
+- The viewership data indicates that the series was able to capture and retain a large audience throughout its run.
+- The increase in viewership over time suggests that the show grew in popularity as it progressed, likely due to word-of-mouth and increased marketing efforts.
+- The drop in viewership for "Dexter: New Blood" could be attributed to various factors such as changes in viewing habits, competition from other shows, or the long gap between the original series and the revival.
+
+## Conclusion:
+
+Dexter's journey through the years has been a testament to its compelling storytelling and strong character development. The data reflects the show's ability to engage viewers, making it a standout series in Showtime's lineup.
 
