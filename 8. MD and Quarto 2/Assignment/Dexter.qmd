@@ -2,19 +2,22 @@
 title: "Dexter Report"
 author: "Husnain Mustafa"
 date: "04/15/2024"
-format: html
+format:
+  html: default
+  pdf: default
 execute:
-  echo: false
+  echo: true
 theme: darkly
+toc: true  # Add Table of Contents
 ---
 
-# Introduction:
+## Introduction:
 *Dexter* is an American television drama that was broadcast on the premium cable channel *Showtime* from October 1, 2006, to September 22, 2013. A total of 96 episodes of Dexter were broadcast over eight seasons.
 
 The series is based on characters created by *Jeff Lindsay* for his "Dexter" series of novels, and follows the life of Dexter Morgan (Michael C. Hall), a Miami Metro Police Department blood pattern analyst with a double life. While investigating murders in the homicide division, Dexter hunts and kills murderers and criminals who have escaped the justice system. Although the first season is based on the events of Darkly Dreaming Dexter, the series' subsequent seasons do not follow the novels in the series. Departing from the narrative of Lindsay's second Dexter novel Dearly Devoted Dexter, the show's writer Daniel Cerone said that the writers "didn't see the opportunity in the second book" to adapt it.
 
 ## Poster:
-<img src="https://posterspy.com/wp-content/uploads/2015/05/Export-Dexter-tribute-Digital-Painting-Ladislas1.jpg" alt="Suits Logo" width="800" height="1131">
+![Dexter Poster](https://posterspy.com/wp-content/uploads/2015/05/Export-Dexter-tribute-Digital-Painting-Ladislas1.jpg){ width=400px height=600px }
 
 ## Overall Average Viewership:
 Over 8 million weekly viewers across all platforms for the entire series, including "Dexter: New Blood". This makes it the most-watched series in Showtime's history.
@@ -22,7 +25,9 @@ Viewership grew steadily throughout the original series run. Season 1 averaged 0
 Despite being the most-watched series in Showtime history, "Dexter: New Blood" averaged a lower viewership of 0.59 million viewers per episode. However, its finale set a record for Showtime with 3 million viewers across all platforms, including 2 million via streaming and on-demand.
 
 ## Viewership Over Time:
-Beow graph shows average viewers over ach season of the show.
+::: {.panel-tabset}
+## Data
+Generating data required fro the plot.
 ```{python}
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -74,7 +79,12 @@ for i in range(0, len(df), 12):
     average_viewers.append(season_average)
 
 season_labels = ['Season 1', 'Season 2', 'Season 3', 'Season 4', 'Season 5', 'Season 6', 'Season 7', 'Season 8']  # Season labels
+```
+## Plots
+Beow graph shows average viewers over each season of the show.
+```{python}
 # Plot
+
 plt.figure(figsize=(8, 6))
 plt.plot(range(1, len(average_viewers)+1), average_viewers, marker='o', linestyle='-')
 plt.title('Average Viewers Per Season')
@@ -84,12 +94,12 @@ plt.xticks(range(1, len(average_viewers)+1), season_labels)  # Set x-ticks as se
 plt.grid(True)  # Adding grid for better visualization
 plt.show()
 
-
 ```
-
-# Popularity Per Episode:
+:::
+## Popularity Per Episode:
 This plot shows the  viewership of the show over the years. With each season highlightes and each episode as a distinct point.
 ```{python}
+#| code-fold: true
 plt.figure(figsize=(8, 6))
 colors = ['b', 'g', 'r', 'c', 'm', 'y', 'k', 'orange']  # List of colors
 season_labels = ['Season 1', 'Season 2', 'Season 3', 'Season 4', 'Season 5', 'Season 6', 'Season 7', 'Season 8']  # Season labels
@@ -107,6 +117,7 @@ plt.show()
 ```
 
 ```{python}
+#| echo: false
 # Inline variable calculations
 season1_avg = round(df['US Viewer Millions'].iloc[0:12].mean(),2)
 season4_avg = round(df['US Viewer Millions'].iloc[36:48].mean(),2)
@@ -114,7 +125,7 @@ season8_avg = round(df['US Viewer Millions'].iloc[84:96].mean(),2)
 finale_viewers = round(df['US Viewer Millions'].iloc[-1],2)
 ```
 
-# Season Viewership Analysis:
+## Season Viewership Analysis:
 
 The *Dexter* series has shown a remarkable trend in viewership over its eight-season run. The analysis below utilizes inline variables to summarize key insights from the viewership data.
 
