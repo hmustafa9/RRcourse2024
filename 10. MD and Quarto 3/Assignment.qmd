@@ -5,8 +5,10 @@ date: today
 output: html_document
 ---
 
-```{r}
-load("../Data/season_1.RData")
+```{python}
+import pandas as pd
+import plotly
+s1=pd.read_csv('/Users/husnainmustafa/Documents/GitHub/RRcourse2024/Data/got/season_1.csv')
 ```
 
 # Game of Thrones - Season 1 summary in numbers
@@ -35,9 +37,31 @@ The most popular episode of the season was "Fire and Blood", in which:
 
 You can see how the viewership of the episodes changed in Figure 1.
 
-```{r}
-#| label = "viewers_plot"
-plot(season_data$viewers, type="l", col="red", lwd=5, xlab = "Episode number", ylab = "1st day TV viewers in the US (millions)")
+```{python}
+
+import plotly.graph_objs as go
+
+
+# Assuming s1 is your pandas DataFrame
+# Replace 'viewers' with the actual column name containing viewers data
+# Assuming 'viewers' is the column name for 1st day TV viewers in the US (millions)
+
+# Create a line plot
+fig = go.Figure()
+
+fig.add_trace(go.Scatter(x=s1.index, y=s1['viewers'],
+                    mode='lines',
+                    name='Viewers',
+                    line=dict(color='red', width=5)))
+
+# Update layout
+fig.update_layout(title='1st day TV viewers in the US (millions)',
+                  xaxis_title='Episode number',
+                  yaxis_title='1st day TV viewers in the US (millions)')
+
+# Show plot
+fig.show()
+
 ```
 
 ***
