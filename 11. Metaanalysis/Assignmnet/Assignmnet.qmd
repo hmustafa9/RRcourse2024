@@ -1,0 +1,146 @@
+---
+title: "Metanalysis Solution"
+author: "Husnain Mustafa"
+date: today
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+execute:
+  echo: true
+  warning: false
+theme: darkly
+---
+
+## Loading Data and Packages:
+Start by loading the data and verifying that all the requirements are met.
+```{r}
+# Install and load necessary packages
+
+library(readxl)
+library(meta)
+library(metafor)
+library(ggplot2)
+
+# Import the data from the Excel file
+data <- read_excel("../data/metaanalysis_data.xlsx")
+
+# View the first few rows of the data
+head(data)
+```
+
+Next we can generate some aditional variables to help us perform teh required analysis. 
+
+## Effect Sizes for Toys:
+Calculating individual effect sizes for Male and Female toys allongwith their variane. 
+```{r}
+# Calculate effect sizes and variances for male toys
+data$effect_size_male <- data$Mean_boys_play_male - data$Mean_girls_play_male
+data$variance_male <- (data$SD_boys_play_male^2 / data$N_boys) + (data$SD_girls_play_male^2 / data$N_girls)
+
+# Calculate effect sizes and variances for female toys
+data$effect_size_female <- data$Mean_boys_play_female - data$Mean_girls_play_female
+data$variance_female <- (data$SD_boys_play_female^2 / data$N_boys) + (data$SD_girls_play_female^2 / data$N_girls)
+
+```
+## Perfroming Meta Analysis:
+Now we can perform the meta analysis on the effect sizes for male and female toys.
+
+### Male Toys
+```{r}
+# Meta-analysis for male toys
+res_male <- rma(yi = data$effect_size_male, vi = data$variance_male, method="REML")
+
+# Summary of the meta-analysis for male toys
+summary(res_male)
+
+```
+
+```{r}
+# Funnel plot for male toys
+funnel(res_male)
+
+# Optional: Enhanced funnel plot with ggplot2
+funnel_plot_male <- ggplot(data, aes(x = effect_size_male, y = sqrt(variance_male))) +
+  geom_point() +
+  geom_smooth(method = "lm", color = "red") +
+  labs(title = "Funnel Plot for Male Toys", x = "Effect Size", y = "Standard Error") +
+  theme_minimal()
+
+print(funnel_plot_male)
+
+```
+
+### Female Toys
+```{r}
+# Meta-analysis for female toys
+res_female <- rma(yi = data$effect_size_female, vi = data$variance_female, method="REML")
+
+# Summary of the meta-analysis for female toys
+summary(res_female)
+```
+
+```{r}
+# Funnel plot for female toys
+funnel(res_female)
+
+# Optional: Enhanced funnel plot with ggplot2
+funnel_plot_female <- ggplot(data, aes(x = effect_size_female, y = sqrt(variance_female))) +
+  geom_point() +
+  geom_smooth(method = "lm", color = "red") +
+  labs(title = "Funnel Plot for Female Toys", x = "Effect Size", y = "Standard Error") +
+  theme_minimal()
+
+print(funnel_plot_female)
+
+```
+### Adding Aditional Variables
+Meta-regression for male toys, assuming quality columns are binary indicators (0 or 1).
+Summary of the meta-regression for male toys
+```{r}
+res_meta_reg_male <- rma(yi = data$effect_size_male, vi = data$variance_male, 
+                         mods = ~ data$`Neutral toys` + data$`Parent present`  + data$Setting + data$Country + data$`NOS score`,
+                         method="REML")
+
+
+summary(res_meta_reg_male)
+
+```
+
+Meta-regression for female toys.
+Summary of the meta-regression for female toys.
+```{r}
+
+res_meta_reg_female <- rma(yi = data$effect_size_female, vi = data$variance_female, 
+                           mods = ~ data$`Neutral toys` + data$`Parent present`  + data$Setting + data$Country + data$`NOS score`,
+                           method="REML")
+
+
+summary(res_meta_reg_female)
+
+```
+
+Meta-regression to check if author gender affects the results for male toys
+```{r}
+
+res_author_gender_male <- rma(yi = data$effect_size_male, vi = data$variance_male, 
+                              mods = ~ data$`Female authors` + data$`Male authors`,
+                              method="REML")
+
+
+summary(res_author_gender_male)
+
+```
+
+Meta-regression to check if author gender affects the results for female toys
+```{r}
+
+res_author_gender_female <- rma(yi = data$effect_size_female, vi = data$variance_female, 
+                                mods = ~ data$`Female authors` + data$`Male authors`,
+                                method="REML")
+
+# Summary of the meta-regression for female toys
+summary(res_author_gender_female)
+
+```
+
