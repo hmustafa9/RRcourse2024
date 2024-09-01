@@ -1,0 +1,26 @@
+(base) husnainmustafa@MacBook-Pro-3 EX2 % git status
+On branch main
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	.gitignore
+
+nothing added to commit but untracked files present (use "git add" to track)
+(base) husnainmustafa@MacBook-Pro-3 EX2 % git log
+commit a7bbdc25b25bd04c7bde7da1ad580be109d2bcd1 (HEAD -> main)
+Author: Husnain Mustafa <h.mustafa@student.uw.edu.pl>
+Date:   Thu Mar 14 19:33:34 2024 +0500
+
+    Modified README.md and added readme.txt
+
+commit 67a196b457107f8b62101df69e487a59ee8227b9
+Author: Husnain Mustafa <h.mustafa@student.uw.edu.pl>
+Date:   Thu Mar 14 19:31:51 2024 +0500
+
+    Added README.md with one line of text
+(base) husnainmustafa@MacBook-Pro-3 EX2 % git ls-files
+README.md
+readme.txt
+(base) husnainmustafa@MacBook-Pro-3 EX2 % git ls-files -o
+.gitignore
+data/data1.csv
+(base) husnainmustafa@MacBook-Pro-3 EX2 % 

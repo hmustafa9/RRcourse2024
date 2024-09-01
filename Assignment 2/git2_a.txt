@@ -1,0 +1,61 @@
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	git2_a.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+commit 80c14d236c9e9fb4dc5d8904b01e977fca9d2a33
+Merge: 66ea008 90d94f3
+Author: Developer_2 <h.mustafa@student.uw.edu.pl>
+Date:   Thu Mar 14 23:43:02 2024 +0500
+
+    Fixed Issues
+    Merge branch 'main' of /Users/husnainmustafa/Documents/Reproducible Research/RR_git2/CentralRepo
+
+commit 66ea00864d36fdbcf5733ff2c27667ff0f6986fb
+Author: Developer_2 <h.mustafa@student.uw.edu.pl>
+Date:   Thu Mar 14 23:38:14 2024 +0500
+
+    Merging for second line #
+
+commit 90d94f3214eaa194a74a3899db59293b8692a97b
+Merge: 5f26eaa 61ccb4e
+Author: Developer_1 <h.mustafa@student.uw.edu.pl>
+Date:   Thu Mar 14 23:29:35 2024 +0500
+
+    Merge branch 'main' of /Users/husnainmustafa/Documents/Reproducible Research/RR_git2/CentralRepo
+    different filed
+    
+    djfhskjfhsjd
+    idjhfjdhkfhjjfdhsjkfhjd
+
+commit 5f26eaa5b2f153a776d144e5e9f98f0bce300eb0
+Author: Developer_1 <h.mustafa@student.uw.edu.pl>
+Date:   Thu Mar 14 23:27:39 2024 +0500
+
+    Added text3
+
+commit 61ccb4ee1f80398190e45abfece37d99acf2874f
+Author: Developer_2 <h.mustafa@student.uw.edu.pl>
+Date:   Thu Mar 14 23:26:34 2024 +0500
+
+    Added readme.md and changed readme.txt
+
+commit a1040cfe2f49bfc74775df6e7b2a6816547fc0e0
+Author: Developer_1 <h.mustafa@student.uw.edu.pl>
+Date:   Thu Mar 14 23:24:24 2024 +0500
+
+    Added Readme.txt
+
+commit 653912ecc9cb825c618e1f183a5ac15d93678daa
+Author: Developer_1 <h.mustafa@student.uw.edu.pl>
+Date:   Thu Mar 14 23:22:38 2024 +0500
+
+    Added the file with code
+.DS_Store
+code.R
+readme.md
+readme.txt
+text3.txt
